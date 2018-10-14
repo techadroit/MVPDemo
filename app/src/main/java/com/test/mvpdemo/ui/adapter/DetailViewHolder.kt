@@ -17,11 +17,13 @@ class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Layo
 
         tvTitle.text = detail.title
 
-        if (detail.description != null && !detail.description.equals("null", true)) {
-            tvDescription.text = detail.description
-            tvDescription.visibility = View.VISIBLE
-        } else {
-            tvDescription.visibility = View.GONE
+        if(tvDescription != null) {
+            if (detail.description != null && !detail.description.equals("null", true)) {
+                tvDescription.text = detail.description
+                tvDescription.visibility = View.VISIBLE
+            } else {
+                tvDescription.visibility = View.GONE
+            }
         }
 
         if (detail.imageHref != null && !detail.imageHref.equals("null", true)) {

@@ -37,12 +37,12 @@ fun addDetailScreenAnimation(fragment: DetailFragment) {
 }
 
 
-fun isNull(string : String) : Boolean{
+fun isNull(string : String?) : Boolean{
 
     if(string == null)
         return true
 
-    if(string.equals("null",false))
+    if(string.equals("null",true))
         return true
 
     return false

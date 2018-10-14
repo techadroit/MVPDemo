@@ -42,5 +42,6 @@ ext {
     picassoVersion = "2.71828"
     junitVersion = '4.12'
     espressoVersion = '3.0.2'
+    constraintLayout = '1.1.2'
     materialValuesVersion = '1.1.1'
 }

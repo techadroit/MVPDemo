@@ -40,10 +40,10 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
             }
         }
 
-        fetchWeatherInfo()
+        loadData()
     }
 
-    fun fetchWeatherInfo() {
+    fun loadData() {
         presenter.loadData()
     }
 

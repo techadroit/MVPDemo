@@ -46,6 +46,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
     implementation "blue.aodev:material-values:$rootProject.materialValuesVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayout"
 
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"

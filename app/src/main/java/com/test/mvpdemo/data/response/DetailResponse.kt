@@ -6,5 +6,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class DetailResponse(
         val title: String,
-        val rows: List<Detail>
+        var rows: List<Detail>
 ) : Parcelable
