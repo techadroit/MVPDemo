@@ -35,3 +35,15 @@ fun addDetailScreenAnimation(fragment: DetailFragment) {
         fragment.enterTransition = Fade()
     }
 }
+
+
+fun isNull(string : String) : Boolean{
+
+    if(string == null)
+        return true
+
+    if(string.equals("null",false))
+        return true
+
+    return false
+}

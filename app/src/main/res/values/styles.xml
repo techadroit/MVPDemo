@@ -1,11 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <style name="error_text_style">
@@ -25,6 +26,14 @@
         <item name="android:textColor">@color/almost_black</item>
         <item name="android:textSize">@dimen/title_text_sizse</item>
         <item name="android:fontFamily">sans-serif-medium</item>
+
+    </style>
+
+    <style name="description_style">
+        <item name="android:textColor">@color/material_color_grey_700</item>
+        <item name="android:textSize">@dimen/description_text_sizes</item>
+        <item name="android:fontFamily">sans-serif-regular</item>
+
     </style>
 
     <!--<style name="ToolBarStyle" parent="ToolBarStyle.Base"/>-->
@@ -42,7 +51,6 @@
 
     <style name="toolbar_title_style" >
         <!--Any text styling can be done here-->
-        <item name="textColor">@color/almost_black</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">normal</item>

@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Detail(
-        val title: String,
-        val description: String,
-        val imageHref: String
+        val title: String ?,
+        val description: String ?,
+        val imageHref : String ?
 ) : Parcelable
