@@ -3,11 +3,14 @@ package com.test.mvpdemo.ui.activities
 import android.os.Bundle
 import android.view.View
 import com.test.mvpdemo.R
+import com.test.mvpdemo.data.response.AboutResponse
 import com.test.mvpdemo.ui.base.BaseActivity
 import com.test.mvpdemo.ui.base.Response
+import com.test.mvpdemo.ui.fragments.DetailFragment
 import com.test.mvpdemo.ui.fragments.ErrorFragment
 import com.test.mvpdemo.ui.presenter.MainPresenter
 import com.test.mvpdemo.ui.presenter.MainView
+import com.test.mvpdemo.util.addDetailScreenAnimation
 import com.test.mvpdemo.util.addErrorAnimation
 import com.test.mvpdemo.util.getRotateAnimation
 import kotlinx.android.synthetic.main.activity_main.*
@@ -73,6 +76,14 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
                     imvLoading.clearAnimation()
                     imvLoading.visibility = View.GONE
                 }
+            }
+            is Response.SuccessResponse -> {
+                var fragment = DetailFragment()
+                var bundle = Bundle()
+                bundle.putParcelable("details", response.s as AboutResponse)
+                fragment.arguments = bundle
+                addDetailScreenAnimation(fragment)
+                supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment, "success").commit()
             }
             is Response.ErrorResponse -> {
                 var fragment = ErrorFragment()
