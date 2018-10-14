@@ -1,7 +1,7 @@
 package com.test.mvpdemo.ui.presenter
 
 import com.test.mvpdemo.data.network.NetworkHandler
-import com.test.mvpdemo.data.response.AboutResponse
+import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.data.usecases.FetchDetailUsecase
 import com.test.mvpdemo.ui.base.BasePresenter
 import com.test.mvpdemo.ui.base.Response
@@ -18,12 +18,12 @@ class MainPresenter : BasePresenter<MainView>() {
         showLoading(true)
 
         disposables.add(usecase.execute().subscribeOn(schedulers.io()).observeOn(schedulers.ui())
-                .subscribeWith(object : DisposableObserver<AboutResponse>() {
+                .subscribeWith(object : DisposableObserver<DetailResponse>() {
                     override fun onComplete() {
 
                     }
 
-                    override fun onNext(t: AboutResponse) {
+                    override fun onNext(t: DetailResponse) {
                         showLoading(false)
                         view?.onSuccess(Response.SuccessResponse(t))
                     }

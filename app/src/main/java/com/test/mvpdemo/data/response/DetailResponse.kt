@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class AboutResponse(
+data class DetailResponse(
         val title: String,
         val rows: List<Detail>
 ) : Parcelable

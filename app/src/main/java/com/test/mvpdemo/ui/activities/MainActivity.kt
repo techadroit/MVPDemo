@@ -3,7 +3,7 @@ package com.test.mvpdemo.ui.activities
 import android.os.Bundle
 import android.view.View
 import com.test.mvpdemo.R
-import com.test.mvpdemo.data.response.AboutResponse
+import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.ui.base.BaseActivity
 import com.test.mvpdemo.ui.base.Response
 import com.test.mvpdemo.ui.fragments.DetailFragment
@@ -80,7 +80,7 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
             is Response.SuccessResponse -> {
                 var fragment = DetailFragment()
                 var bundle = Bundle()
-                bundle.putParcelable("details", response.s as AboutResponse)
+                bundle.putParcelable("details", response.s as DetailResponse)
                 fragment.arguments = bundle
                 addDetailScreenAnimation(fragment)
                 supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment, "success").commit()

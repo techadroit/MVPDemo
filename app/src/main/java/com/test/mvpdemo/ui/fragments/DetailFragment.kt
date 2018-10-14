@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.test.mvpdemo.R
-import com.test.mvpdemo.data.response.AboutResponse
+import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.ui.adapter.DetailListAdapter
 import com.test.mvpdemo.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.detail_fragment_layout.*
 
 class DetailFragment : BaseFragment() {
 
-    lateinit var detailResponse : AboutResponse
+    lateinit var detailResponse : DetailResponse
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.detail_fragment_layout,container,false)
@@ -27,7 +27,7 @@ class DetailFragment : BaseFragment() {
 
     fun addDataToView(){
         var adapter = DetailListAdapter()
-        detailResponse = arguments?.get("details") as AboutResponse
+        detailResponse = arguments?.get("details") as DetailResponse
         adapter.list =  detailResponse.rows
         rvDetailList.adapter = adapter
         rvDetailList.layoutManager = LinearLayoutManager(context)
