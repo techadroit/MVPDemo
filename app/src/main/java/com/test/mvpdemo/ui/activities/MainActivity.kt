@@ -78,9 +78,12 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
                 }
             }
             is Response.SuccessResponse -> {
+                var detailReponse = response.s as DetailResponse
+                tvTitle.text = detailReponse.title
+                toolbar.visibility = View.VISIBLE
                 var fragment = DetailFragment()
                 var bundle = Bundle()
-                bundle.putParcelable("details", response.s as DetailResponse)
+                bundle.putParcelable("details", detailReponse)
                 fragment.arguments = bundle
                 addDetailScreenAnimation(fragment)
                 supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment, "success").commit()
