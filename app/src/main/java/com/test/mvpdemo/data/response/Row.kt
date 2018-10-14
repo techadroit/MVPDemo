@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Row(
+data class Detail(
         val title: String,
         val description: String,
         val imageHref: String

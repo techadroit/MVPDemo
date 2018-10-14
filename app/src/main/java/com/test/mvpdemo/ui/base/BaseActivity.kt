@@ -3,7 +3,6 @@ package test.gojek.gojektest.ui.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import androidx.lifecycle.LifecycleRegistry
 import com.test.mvpdemo.ui.base.BaseView
 
 abstract class BaseActivity< p : BasePresenter> : AppCompatActivity() {

@@ -22,6 +22,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startLoading()
+        presenter.loadData()
     }
 
     fun startLoading() {

@@ -45,11 +45,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
-    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
-    // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
-    //     AndroidX libraries use this lightweight import for Lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-
 
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
