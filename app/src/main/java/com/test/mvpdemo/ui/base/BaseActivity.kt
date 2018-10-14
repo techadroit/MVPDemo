@@ -1,11 +1,11 @@
-package test.gojek.gojektest.ui.base
+package com.test.mvpdemo.ui.base
 
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.test.mvpdemo.ui.base.BaseView
 
-abstract class BaseActivity< p : BasePresenter> : AppCompatActivity() {
+abstract class BaseActivity< p : BasePresenter<V>, V : BaseView> : AppCompatActivity() {
 
     lateinit protected var presenter: p
 
@@ -24,7 +24,7 @@ abstract class BaseActivity< p : BasePresenter> : AppCompatActivity() {
      */
     protected abstract fun initPresenter(): p
 
-    var view : BaseView ? = null
+    var view : V ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +33,14 @@ abstract class BaseActivity< p : BasePresenter> : AppCompatActivity() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
-        view?.let { presenter.detachView() }
+    override fun onStart() {
+        super.onStart()
+        view?.let { presenter.attachView(view as V) }
     }
 
-    override fun onResume() {
-        super.onResume()
-        view?.let { presenter.attachView(view as BaseView) }
+    override fun onStop() {
+        super.onStop()
+        view?.let { presenter.detachView() }
     }
 
     override fun onDestroy() {

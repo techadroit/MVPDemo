@@ -1,8 +1,11 @@
 package com.test.mvpdemo.util
 
+import android.transition.Slide
+import android.view.Gravity
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import com.test.mvpdemo.ui.fragments.ErrorFragment
 
 fun getRotateAnimation(): Animation {
 
@@ -16,4 +19,11 @@ fun getRotateAnimation(): Animation {
     rotate.interpolator = LinearInterpolator()
 
     return rotate
+}
+
+fun addErrorAnimation(fragment: ErrorFragment) {
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        fragment.enterTransition = Slide(Gravity.BOTTOM)
+        fragment.exitTransition = Slide(Gravity.BOTTOM)
+    }
 }

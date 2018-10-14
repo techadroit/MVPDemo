@@ -1,15 +1,15 @@
-package test.gojek.gojektest.ui.base
+package com.test.mvpdemo.ui.base
 
 
 import com.test.mvpdemo.ui.base.BaseView
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BasePresenter  {
+abstract class BasePresenter< T : BaseView>  {
 
     val disposables = CompositeDisposable()
-    var view : BaseView ?= null
+    var view : T ?= null
 
-    fun attachView(view : BaseView) {
+    fun attachView(view : T) {
         this.view = view
     }
 

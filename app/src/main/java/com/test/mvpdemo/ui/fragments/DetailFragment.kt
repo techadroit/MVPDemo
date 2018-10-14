@@ -1,4 +1,7 @@
 package com.test.mvpdemo.ui.fragments
 
-class DetailFragment {
+import com.test.mvpdemo.ui.base.BaseFragment
+
+class DetailFragment : BaseFragment() {
+
 }

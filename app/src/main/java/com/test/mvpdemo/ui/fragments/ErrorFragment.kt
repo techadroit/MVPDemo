@@ -1,13 +1,13 @@
-package test.gojek.gojektest.ui.weather_info.fragment
+package com.test.mvpdemo.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.test.mvpdemo.R
+import com.test.mvpdemo.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.error_screen.*
-import test.gojek.gojektest.R
-import test.gojek.gojektest.ui.base.BaseFragment
 
 class ErrorFragment : BaseFragment() {
 

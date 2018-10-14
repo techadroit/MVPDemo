@@ -1,4 +1,4 @@
-package test.gojek.gojektest.ui.base
+package com.test.mvpdemo.ui.base
 
 import android.support.v4.app.Fragment
 
