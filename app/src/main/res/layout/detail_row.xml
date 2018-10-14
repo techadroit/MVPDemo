@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/detail_element_spacing"
             android:layout_marginRight="@dimen/detail_element_margin"
             android:layout_marginLeft="@dimen/detail_element_margin"
-            android:text="Transportation" />
+            android:text="" />
 
         <TextView
             android:layout_centerHorizontal="true"
@@ -43,8 +43,7 @@
             android:layout_marginBottom="@dimen/detail_element_spacing"
             android:layout_marginRight="@dimen/detail_element_margin"
             android:layout_marginLeft="@dimen/detail_element_margin"
-            android:text="It is well known fact that polar bears are the main mode of transpaortsa in canada.
-            They consume far less gass and have the added benefit of being defiicult to steel" />
+            android:text="" />
 
 
         <ImageView
