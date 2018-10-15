@@ -1,6 +1,5 @@
 package com.test.mvpdemo.ui.presenter
 
-import com.test.mvpdemo.data.network.ApiService
 import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.data.usecases.FetchDetailUsecase
 import com.test.mvpdemo.ui.base.BasePresenter

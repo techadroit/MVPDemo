@@ -105,4 +105,8 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
         }
 
     }
+
+    public override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
 }
