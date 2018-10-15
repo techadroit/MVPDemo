@@ -1,6 +1,6 @@
 package com.test.mvpdemo.ui.presenter
 
-import com.test.mvpdemo.data.network.NetworkHandler
+import com.test.mvpdemo.data.network.ApiService
 import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.data.usecases.FetchDetailUsecase
 import com.test.mvpdemo.ui.base.BasePresenter
@@ -8,13 +8,12 @@ import com.test.mvpdemo.ui.base.Response
 import com.test.mvpdemo.util.SchedulersUtil
 import io.reactivex.observers.DisposableObserver
 
-class MainPresenter : BasePresenter<MainView>() {
+class MainPresenter(var schedulers: SchedulersUtil,
+                    var usecase: FetchDetailUsecase
+) : BasePresenter<MainView>() {
 
-    var schedulers = SchedulersUtil()
 
     fun loadData() {
-        var apiService = NetworkHandler.getApiService()
-        var usecase = FetchDetailUsecase(apiService)
         showLoading(true)
 
         disposables.add(usecase.execute().subscribeOn(schedulers.io()).observeOn(schedulers.ui())
@@ -37,7 +36,7 @@ class MainPresenter : BasePresenter<MainView>() {
         )
     }
 
-    fun showLoading(boolean : Boolean){
+    fun showLoading(boolean: Boolean) {
         view?.onLoading(Response.OnLoading(boolean))
     }
 }

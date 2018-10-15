@@ -3,13 +3,16 @@ package com.test.mvpdemo.ui.activities
 import android.os.Bundle
 import android.view.View
 import com.test.mvpdemo.R
+import com.test.mvpdemo.data.network.NetworkHandler
 import com.test.mvpdemo.data.response.DetailResponse
+import com.test.mvpdemo.data.usecases.FetchDetailUsecase
 import com.test.mvpdemo.ui.base.BaseActivity
 import com.test.mvpdemo.ui.base.Response
 import com.test.mvpdemo.ui.fragments.DetailFragment
 import com.test.mvpdemo.ui.fragments.ErrorFragment
 import com.test.mvpdemo.ui.presenter.MainPresenter
 import com.test.mvpdemo.ui.presenter.MainView
+import com.test.mvpdemo.util.SchedulersUtil
 import com.test.mvpdemo.util.addDetailScreenAnimation
 import com.test.mvpdemo.util.addErrorAnimation
 import com.test.mvpdemo.util.getRotateAnimation
@@ -24,7 +27,11 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
 
     override fun initPresenter(): MainPresenter {
         view = this
-        return MainPresenter()
+
+        var apiService = NetworkHandler.getApiService()
+        var usecase = FetchDetailUsecase(apiService)
+        var schedulers = SchedulersUtil()
+        return MainPresenter(schedulers,usecase)
     }
 
     override fun onStart() {
