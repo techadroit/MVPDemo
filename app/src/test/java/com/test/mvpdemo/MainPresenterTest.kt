@@ -36,7 +36,7 @@ class MainPresenterTest {
         NetworkHandler.init()
         RxAndroidPlugins.setInitMainThreadSchedulerHandler({ Schedulers.trampoline()})
         MockitoAnnotations.initMocks(this)
-        mainPrsenter = MainPresenter(SchedulersUtil(),apiService, usecase)
+        mainPrsenter = MainPresenter(SchedulersUtil(), usecase)
         mainPrsenter.view = mainView
     }
 

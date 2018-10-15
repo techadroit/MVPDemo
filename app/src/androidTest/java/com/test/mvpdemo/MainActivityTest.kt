@@ -1,6 +1,7 @@
 package com.test.mvpdemo
 
 import android.support.test.espresso.Espresso
+import android.support.test.espresso.IdlingPolicies
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.action.ViewActions.scrollTo
 import android.support.test.espresso.assertion.ViewAssertions.matches
@@ -14,6 +15,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Before
+import java.util.concurrent.TimeUnit
+import android.support.test.espresso.IdlingResource
+
 
 
 
@@ -48,6 +52,13 @@ class MainActivityTest {
         Espresso.onView(withId(R.id.btnRetry)).check(matches(isDisplayed()))
         Espresso.onView(withId(R.id.btnRetry)).perform(click())
     }
+
+//    @Test fun checkDataLoaded(){
+//
+//        val idlingResources = DataLoadIdlingResources(activity)
+//        Espresso.registerIdlingResources(idlingResources)
+//        Espresso.onView(withId(R.id.rvDetailList)).check(matches(isDisplayed()))
+//    }
 
 }
 
