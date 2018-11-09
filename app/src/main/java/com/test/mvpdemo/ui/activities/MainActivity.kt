@@ -10,6 +10,7 @@ import com.test.mvpdemo.ui.base.BaseActivity
 import com.test.mvpdemo.ui.base.Response
 import com.test.mvpdemo.ui.fragments.DetailFragment
 import com.test.mvpdemo.ui.fragments.ErrorFragment
+import com.test.mvpdemo.ui.fragments.OnRefreshListener
 import com.test.mvpdemo.ui.presenter.MainPresenter
 import com.test.mvpdemo.ui.presenter.MainView
 import com.test.mvpdemo.util.SchedulersUtil
@@ -18,8 +19,11 @@ import com.test.mvpdemo.util.addErrorAnimation
 import com.test.mvpdemo.util.getRotateAnimation
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRetryListener, com.test.mvpdemo.ui.presenter.MainView {
+class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRetryListener, com.test.mvpdemo.ui.presenter.MainView , OnRefreshListener {
 
+    override fun onRefresh() {
+        loadData()
+    }
 
     override fun getLayout(): Int {
         return R.layout.activity_main
@@ -37,17 +41,21 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
     override fun onStart() {
         super.onStart()
 
-        presenter.loadData()
+        loadData()
     }
 
     override fun onRetryClick() {
+        removeAllViews()
+        loadData()
+    }
+
+    fun removeAllViews() {
+
         for (fragment in supportFragmentManager.fragments) {
             fragment?.let {
                 supportFragmentManager.beginTransaction().remove(fragment).commit()
             }
         }
-
-        loadData()
     }
 
     fun loadData() {
@@ -93,6 +101,7 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
                 bundle.putParcelable("details", detailReponse)
                 fragment.arguments = bundle
                 addDetailScreenAnimation(fragment)
+                removeAllViews()
                 supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment, "success").commit()
             }
             is Response.ErrorResponse -> {

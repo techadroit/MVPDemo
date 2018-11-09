@@ -1,5 +1,6 @@
 package com.test.mvpdemo.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.detail_fragment_layout.*
 class DetailFragment : BaseFragment() {
 
     lateinit var detailResponse : DetailResponse
+    var refreshListener: OnRefreshListener ?= null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.detail_fragment_layout,container,false)
@@ -23,6 +25,13 @@ class DetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addDataToView()
+        addSwipeListener()
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if(context is OnRefreshListener)
+            refreshListener = context
     }
 
     fun addDataToView(){
@@ -33,4 +42,17 @@ class DetailFragment : BaseFragment() {
         rvDetailList.layoutManager = LinearLayoutManager(context)
     }
 
+    fun addSwipeListener(){
+
+        swipeRefresh.setOnRefreshListener {
+            refreshListener?.onRefresh()
+        }
+    }
+
+}
+
+
+interface OnRefreshListener{
+
+    fun onRefresh()
 }
