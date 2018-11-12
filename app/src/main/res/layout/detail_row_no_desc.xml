@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/light_grey"
@@ -10,7 +11,8 @@
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
     card_view:cardCornerRadius="@dimen/material_card_corner_radius"
-    card_view:cardElevation="@dimen/material_card_elevation_resting">
+    card_view:cardElevation="@dimen/material_card_elevation_resting"
+    tools:ignore="Overdraw">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -32,7 +34,6 @@
 
 
         <ImageView
-            android:layout_alignTop="@+id/tvDescription"
             android:layout_below="@id/tvTitle"
             android:layout_centerHorizontal="true"
             android:id="@+id/imvNews"
@@ -42,7 +43,8 @@
             android:layout_marginTop="@dimen/detail_element_margin"
             android:layout_marginRight="@dimen/detail_element_margin"
             android:layout_marginBottom="@dimen/detail_element_spacing"
-            />
+
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 

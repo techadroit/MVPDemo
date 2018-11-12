@@ -2,7 +2,6 @@ package com.test.mvpdemo
 
 import com.test.mvpdemo.data.network.ApiService
 import com.test.mvpdemo.data.network.NetworkHandler
-import com.test.mvpdemo.data.response.Detail
 import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.data.usecases.FetchDetailUsecase
 import com.test.mvpdemo.ui.base.Response
@@ -15,7 +14,6 @@ import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*

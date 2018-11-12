@@ -12,8 +12,7 @@ import kotlinx.android.synthetic.main.fragment_loading_layout.*
 class LoadingFragments : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_loading_layout,container,false)
-        return view
+        return inflater.inflate(R.layout.fragment_loading_layout,container,false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

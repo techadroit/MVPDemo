@@ -2,6 +2,7 @@ package com.test.mvpdemo.data.network
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,7 +17,10 @@ object NetworkHandler {
 
     fun init() {
 
-        val okHttpClient = OkHttpClient().newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build()
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val okHttpClient = OkHttpClient().newBuilder().addInterceptor(interceptor)
+                .connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build()
 
         retrofit = Retrofit.Builder()
                 .baseUrl(NetworkHandler.BASE_URL)

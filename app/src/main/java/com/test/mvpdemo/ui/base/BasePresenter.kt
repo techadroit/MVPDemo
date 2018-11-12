@@ -1,7 +1,6 @@
 package com.test.mvpdemo.ui.base
 
 
-import com.test.mvpdemo.ui.base.BaseView
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BasePresenter< T : BaseView>  {

@@ -20,8 +20,7 @@ class DetailFragment : BaseFragment() {
     var adapter = DetailListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.detail_fragment_layout,container,false)
-        return view
+        return inflater.inflate(R.layout.detail_fragment_layout,container,false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

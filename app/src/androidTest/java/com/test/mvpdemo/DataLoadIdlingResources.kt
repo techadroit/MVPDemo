@@ -22,9 +22,9 @@ class DataLoadIdlingResources(var activity: MainActivity) : IdlingResource {
         }
 
         if (isIdle) {
-            recourceCallback.onTransitionToIdle();
+            recourceCallback.onTransitionToIdle()
         }
-        return isIdle;
+        return isIdle
     }
 
     override fun registerIdleTransitionCallback(callback: IdlingResource.ResourceCallback) {

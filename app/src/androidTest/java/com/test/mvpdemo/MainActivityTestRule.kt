@@ -13,7 +13,7 @@ open class MainActivityTestRule<A : Activity>(activityClass: Class<A>) : Activit
             return super.getActivityIntent()
         }
 
-    override protected fun beforeActivityLaunched() {
+    override fun beforeActivityLaunched() {
         Log.e("MainActivityTestRule", "Execute before the activity is launched")
         super.beforeActivityLaunched()
     }

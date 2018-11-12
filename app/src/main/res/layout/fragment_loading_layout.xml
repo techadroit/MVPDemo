@@ -7,6 +7,8 @@
         android:layout_width="@dimen/progress_size"
         android:layout_height="@dimen/progress_size"
         android:layout_gravity="center"
-        android:src="@drawable/ic_loading" />
+        android:src="@drawable/ic_loading"
+        android:contentDescription="Loader"
+        />
 
 </FrameLayout>

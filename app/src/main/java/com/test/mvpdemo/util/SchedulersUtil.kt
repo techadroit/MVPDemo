@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by saghayam
  */
-class SchedulersUtil constructor() {
+class SchedulersUtil {
 
     /**
      * IO thread pool scheduler

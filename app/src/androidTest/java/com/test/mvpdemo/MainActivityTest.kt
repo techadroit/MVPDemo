@@ -1,24 +1,17 @@
 package com.test.mvpdemo
 
 import android.support.test.espresso.Espresso
-import android.support.test.espresso.IdlingPolicies
 import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.scrollTo
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.*
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.filters.SmallTest
-import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.test.mvpdemo.ui.activities.MainActivity
-import okhttp3.Response
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Before
-import java.util.concurrent.TimeUnit
-import android.support.test.espresso.IdlingResource
-
-
 
 
 @RunWith(AndroidJUnit4::class)

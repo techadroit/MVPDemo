@@ -18,8 +18,7 @@ class ErrorFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.error_screen, container, false)
-        return view
+        return inflater.inflate(R.layout.error_screen, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

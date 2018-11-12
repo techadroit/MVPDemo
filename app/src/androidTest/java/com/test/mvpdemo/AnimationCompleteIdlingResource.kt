@@ -1,7 +1,5 @@
 package com.test.mvpdemo
 
-import android.support.test.espresso.IdlingResource
-
 //class AnimationCompleteIdlingResource : IdlingResource {
 //    override fun getName(): String {
 //        return this.javaClass.name

@@ -23,7 +23,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
 
     var onRefresh: Boolean = false
     lateinit var detailFrament: DetailFragment
-    var title : String ?= null
+    var title: String? = null
 
     override fun onRefresh() {
         onRefresh = true
@@ -43,12 +43,12 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         return MainPresenter(schedulers, usecase)
     }
 
-    fun init(){
-        if(supportFragmentManager.findFragmentByTag("success") != null){
+    fun init() {
+        if (supportFragmentManager.findFragmentByTag("success") != null) {
             detailFrament = supportFragmentManager.findFragmentByTag("success") as DetailFragment
             supportFragmentManager.beginTransaction().replace(R.id.flContainer, detailFrament, "success").commit()
             onLoading(Response.OnLoading(false))
-        }else {
+        } else {
             loadData()
         }
     }
@@ -60,7 +60,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putString("title",title)
+        outState?.putString("title", title)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -81,7 +81,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
             for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment).commit()
             }
-        }catch (e : Exception){
+        } catch (e: Exception) {
 
         }
     }
@@ -132,9 +132,9 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
 
 
 //                removeAllViews()
-                if(onRefresh){
+                if (onRefresh) {
                     detailFrament.addNewData(detailReponse.rows)
-                }else {
+                } else {
                     detailFrament = DetailFragment()
                     var bundle = Bundle()
                     bundle.putParcelable("details", detailReponse)
@@ -153,7 +153,6 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         }
 
     }
-
 
 
 }

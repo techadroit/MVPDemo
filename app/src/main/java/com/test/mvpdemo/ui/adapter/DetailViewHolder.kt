@@ -1,7 +1,6 @@
 package com.test.mvpdemo.ui.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.text.TextUtils
 import android.view.View
 import com.squareup.picasso.Picasso
 import com.test.mvpdemo.R
