@@ -58,7 +58,8 @@
             android:layout_marginTop="@dimen/detail_element_margin"
             android:layout_marginRight="@dimen/detail_element_margin"
             android:layout_marginBottom="@dimen/detail_element_spacing"
-            android:contentDescription="Content Image" />
+            android:contentDescription="Content Image"
+            tools:ignore="RtlHardcoded" />
 
     </RelativeLayout>
 

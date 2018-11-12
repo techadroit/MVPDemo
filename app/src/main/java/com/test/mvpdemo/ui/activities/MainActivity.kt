@@ -1,5 +1,6 @@
 package com.test.mvpdemo.ui.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.test.mvpdemo.R
@@ -75,6 +76,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         loadData()
     }
 
+    @SuppressLint("RestrictedApi")
     fun removeAllViews() {
 
         try {
