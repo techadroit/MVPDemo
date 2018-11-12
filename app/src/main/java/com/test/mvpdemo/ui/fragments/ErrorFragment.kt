@@ -22,6 +22,11 @@ class ErrorFragment : BaseFragment() {
         return view
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnRetryListener)

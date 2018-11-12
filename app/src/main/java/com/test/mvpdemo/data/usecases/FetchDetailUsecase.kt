@@ -8,7 +8,8 @@ import io.reactivex.Observable
 
 class FetchDetailUsecase constructor(var apiService: ApiService) : Interactor<DetailResponse> {
     override fun execute(): Observable<DetailResponse> {
-        return apiService.getData().map {
+        return apiService.getData()
+                .map {
             var list = it.rows.toMutableList()
             var removeItemID = mutableListOf<Int>()
             for (i in 0..list.size - 1) {

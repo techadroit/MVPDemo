@@ -19,9 +19,14 @@ import com.test.mvpdemo.util.addErrorAnimation
 import com.test.mvpdemo.util.getRotateAnimation
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRetryListener, com.test.mvpdemo.ui.presenter.MainView , OnRefreshListener {
+class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRetryListener, com.test.mvpdemo.ui.presenter.MainView, OnRefreshListener {
+
+    var onRefresh: Boolean = false
+    lateinit var detailFrament: DetailFragment
+    var title : String ?= null
 
     override fun onRefresh() {
+        onRefresh = true
         loadData()
     }
 
@@ -35,13 +40,34 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
         var apiService = NetworkHandler.getApiService()
         var usecase = FetchDetailUsecase(apiService)
         var schedulers = SchedulersUtil()
-        return MainPresenter(schedulers,usecase)
+        return MainPresenter(schedulers, usecase)
+    }
+
+    fun init(){
+        if(supportFragmentManager.findFragmentByTag("success") != null){
+            detailFrament = supportFragmentManager.findFragmentByTag("success") as DetailFragment
+            supportFragmentManager.beginTransaction().replace(R.id.flContainer, detailFrament, "success").commit()
+            onLoading(Response.OnLoading(false))
+        }else {
+            loadData()
+        }
     }
 
     override fun onStart() {
         super.onStart()
+        init()
+    }
 
-        loadData()
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putString("title",title)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        title = savedInstanceState?.getString("title")
+        tvTitle.setText(title)
+        toolbar.visibility = View.VISIBLE
     }
 
     override fun onRetryClick() {
@@ -51,10 +77,12 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
 
     fun removeAllViews() {
 
-        for (fragment in supportFragmentManager.fragments) {
-            fragment?.let {
+        try {
+            for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment).commit()
             }
+        }catch (e : Exception){
+
         }
     }
 
@@ -85,6 +113,10 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
         when (response) {
 
             is Response.OnLoading -> {
+
+                if (onRefresh)
+                    return
+
                 if (response.showLoading) {
                     startLoading()
                 } else {
@@ -94,28 +126,34 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(), ErrorFragment.OnRet
             }
             is Response.SuccessResponse -> {
                 var detailReponse = response.s as DetailResponse
+                title = detailReponse.title
                 tvTitle.text = detailReponse.title
                 toolbar.visibility = View.VISIBLE
-                var fragment = DetailFragment()
-                var bundle = Bundle()
-                bundle.putParcelable("details", detailReponse)
-                fragment.arguments = bundle
-                addDetailScreenAnimation(fragment)
-                removeAllViews()
-                supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment, "success").commit()
+
+
+//                removeAllViews()
+                if(onRefresh){
+                    detailFrament.addNewData(detailReponse.rows)
+                }else {
+                    detailFrament = DetailFragment()
+                    var bundle = Bundle()
+                    bundle.putParcelable("details", detailReponse)
+                    detailFrament.arguments = bundle
+                    addDetailScreenAnimation(detailFrament)
+                    supportFragmentManager.beginTransaction().replace(R.id.flContainer, detailFrament, "success").commit()
+                }
+                onRefresh = false
             }
             is Response.ErrorResponse -> {
                 var fragment = ErrorFragment()
                 addErrorAnimation(fragment)
                 supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment, "error").commit()
-
             }
 
         }
 
     }
 
-    public override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-    }
+
+
 }

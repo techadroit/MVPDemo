@@ -13,7 +13,7 @@ class DetailListAdapter : RecyclerView.Adapter<DetailViewHolder>() {
 
 
 
-    var list = listOf<Detail>()
+    var list = mutableListOf<Detail>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
 

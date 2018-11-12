@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.test.mvpdemo.R
+import com.test.mvpdemo.data.response.Detail
 import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.ui.adapter.DetailListAdapter
 import com.test.mvpdemo.ui.base.BaseFragment
@@ -16,10 +17,16 @@ class DetailFragment : BaseFragment() {
 
     lateinit var detailResponse : DetailResponse
     var refreshListener: OnRefreshListener ?= null
+    var adapter = DetailListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.detail_fragment_layout,container,false)
         return view
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +42,7 @@ class DetailFragment : BaseFragment() {
     }
 
     fun addDataToView(){
-        var adapter = DetailListAdapter()
+
         detailResponse = arguments?.get("details") as DetailResponse
         adapter.list =  detailResponse.rows
         rvDetailList.adapter = adapter
@@ -47,6 +54,13 @@ class DetailFragment : BaseFragment() {
         swipeRefresh.setOnRefreshListener {
             refreshListener?.onRefresh()
         }
+    }
+
+    fun addNewData(list : List<Detail>){
+        adapter.list.clear()
+        adapter.list.addAll(list)
+        adapter.notifyDataSetChanged()
+        swipeRefresh.setRefreshing(false)
     }
 
 }
