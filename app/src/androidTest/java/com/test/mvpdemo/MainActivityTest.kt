@@ -14,6 +14,7 @@ import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.ui.activities.MainActivity
 import com.test.mvpdemo.ui.fragments.DetailFragment
 import com.test.mvpdemo.ui.fragments.ErrorFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -43,27 +44,6 @@ class MainActivityTest {
 
         activity.onError(com.test.mvpdemo.ui.base.Response.ErrorResponse(""))
     }
-
-    @Test
-    fun retryButtonclickTest() {
-
-        startFragment(ErrorFragment())
-        Espresso.onView(withId(R.id.btnRetry)).perform(click())
-    }
-
-    fun startFragment(fragment: Fragment) {
-        val fragmentManager = activity.getSupportFragmentManager()
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(fragment, "error")
-        fragmentTransaction.commit()
-    }
-
-//    @Test fun checkDataLoaded(){
-//
-//        val idlingResources = DataLoadIdlingResources(activity)
-//        Espresso.registerIdlingResources(idlingResources)
-//        Espresso.onView(withId(R.id.rvDetailList)).check(matches(isDisplayed()))
-//    }
 
 }
 
