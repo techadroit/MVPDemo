@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.error_screen.*
 
 class ErrorFragment : BaseFragment() {
 
-    var listener: OnRetryListener? = null
+    private var listener: OnRetryListener? = null
 
     interface OnRetryListener {
         fun onRetryClick()

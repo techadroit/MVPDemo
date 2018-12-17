@@ -67,7 +67,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         title = savedInstanceState?.getString("title")
-        tvTitle.setText(title)
+        tvTitle.text = title
         toolbar.visibility = View.VISIBLE
     }
 

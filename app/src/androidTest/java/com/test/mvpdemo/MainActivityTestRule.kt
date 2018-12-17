@@ -7,11 +7,6 @@ import android.util.Log
 
 
 open class MainActivityTestRule<A : Activity>(activityClass: Class<A>) : ActivityTestRule<A>(activityClass) {
-    protected val activityInten1t: Intent
-        get() {
-            Log.e("MainActivityTestRule", "Prepare the activity's intent")
-            return super.getActivityIntent()
-        }
 
     override fun beforeActivityLaunched() {
         Log.e("MainActivityTestRule", "Execute before the activity is launched")
@@ -28,8 +23,4 @@ open class MainActivityTestRule<A : Activity>(activityClass: Class<A>) : Activit
         super.afterActivityFinished()
     }
 
-    fun launch(startIntent: Intent): A {
-        Log.e("MainActivityTestRule", "Launching the activity")
-        return super.launchActivity(startIntent)
-    }
 }

@@ -6,7 +6,7 @@ import com.test.mvpdemo.ui.adapter.WITHOUT_DESC
 import com.test.mvpdemo.util.isNull
 import io.reactivex.Observable
 
-class FetchDetailUsecase constructor(var apiService: ApiService) : Interactor<DetailResponse> {
+class FetchDetailUsecase constructor(private var apiService: ApiService) : Interactor<DetailResponse> {
     override fun execute(): Observable<DetailResponse> {
         return apiService.getData()
                 .map {

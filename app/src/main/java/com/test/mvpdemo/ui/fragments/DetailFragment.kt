@@ -59,7 +59,7 @@ class DetailFragment : BaseFragment() {
         adapter.list.clear()
         adapter.list.addAll(list)
         adapter.notifyDataSetChanged()
-        swipeRefresh.setRefreshing(false)
+        swipeRefresh.isRefreshing = false
     }
 
 }

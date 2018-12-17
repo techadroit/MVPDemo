@@ -13,7 +13,7 @@ object NetworkHandler {
 
     val BASE_URL = "https://dl.dropboxusercontent.com/"
 
-    lateinit private var retrofit: Retrofit
+    private lateinit var retrofit: Retrofit
 
     fun init() {
 

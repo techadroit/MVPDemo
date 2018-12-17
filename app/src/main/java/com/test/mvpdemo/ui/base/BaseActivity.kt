@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 
 abstract class BaseActivity< p : BasePresenter<V>, V : BaseView> : AppCompatActivity() {
 
-    lateinit protected var presenter: p
+    protected lateinit var presenter: p
 
 
     /**

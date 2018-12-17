@@ -24,8 +24,6 @@ import java.io.IOException
 @RunWith(MockitoJUnitRunner::class)
 class MainPresenterTest {
 
-    @Mock lateinit var schedulersUtil: SchedulersUtil
-    @Mock lateinit var apiService: ApiService
     @Mock lateinit var usecase: FetchDetailUsecase
     @Mock lateinit var mainView: MainView
     @InjectMocks lateinit var mainPrsenter : MainPresenter
