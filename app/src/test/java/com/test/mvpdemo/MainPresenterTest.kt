@@ -38,7 +38,7 @@ class MainPresenterTest {
 
     @Test fun checkLoadData(){
 
-        var detailResponse =  mock(DetailResponse::class.java)
+        val detailResponse =  mock(DetailResponse::class.java)
         `when`(usecase.execute()).thenReturn(Observable.just(detailResponse))
         mainPrsenter.loadData()
         verify(mainView).onSuccess(Response.SuccessResponse(detailResponse))

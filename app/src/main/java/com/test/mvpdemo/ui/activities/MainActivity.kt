@@ -38,9 +38,9 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     override fun initPresenter(): MainPresenter {
         view = this
 
-        var apiService = NetworkHandler.getApiService()
-        var usecase = FetchDetailUsecase(apiService)
-        var schedulers = SchedulersUtil()
+        val apiService = NetworkHandler.getApiService()
+        val usecase = FetchDetailUsecase(apiService)
+        val schedulers = SchedulersUtil()
         return MainPresenter(schedulers, usecase)
     }
 
@@ -127,7 +127,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
                 }
             }
             is Response.SuccessResponse -> {
-                var detailReponse = response.s as DetailResponse
+                val detailReponse = response.s as DetailResponse
                 title = detailReponse.title
                 tvTitle.text = detailReponse.title
                 toolbar.visibility = View.VISIBLE
@@ -138,7 +138,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
                     detailFrament.addNewData(detailReponse.rows)
                 } else {
                     detailFrament = DetailFragment()
-                    var bundle = Bundle()
+                    val bundle = Bundle()
                     bundle.putParcelable("details", detailReponse)
                     detailFrament.arguments = bundle
                     addDetailScreenAnimation(detailFrament)
@@ -147,7 +147,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
                 onRefresh = false
             }
             is Response.ErrorResponse -> {
-                var fragment = ErrorFragment()
+                val fragment = ErrorFragment()
                 addErrorAnimation(fragment)
                 supportFragmentManager.beginTransaction().replace(R.id.flContainer, fragment, "error").commit()
             }

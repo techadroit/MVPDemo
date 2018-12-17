@@ -17,7 +17,7 @@ class DetailListAdapter : RecyclerView.Adapter<DetailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
 
-        var holder : RecyclerView.ViewHolder
+        val holder : RecyclerView.ViewHolder
 
         when(viewType) {
             WITH_DESC -> holder  = DetailViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.detail_row, parent, false))

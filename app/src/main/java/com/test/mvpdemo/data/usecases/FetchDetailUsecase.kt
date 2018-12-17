@@ -10,10 +10,10 @@ class FetchDetailUsecase constructor(private var apiService: ApiService) : Inter
     override fun execute(): Observable<DetailResponse> {
         return apiService.getData()
                 .map {
-            var list = it.rows.toMutableList()
-            var removeItemID = mutableListOf<Int>()
+            val list = it.rows.toMutableList()
+            val removeItemID = mutableListOf<Int>()
             for (i in 0..list.size - 1) {
-                var item = list.get(i)
+                val item = list.get(i)
                 if (isNull(item.title)) {
                     removeItemID.add(i)
                 }
