@@ -7,14 +7,19 @@ import io.reactivex.Observable
 
 class FeedRespository constructor(var apiService: ApiService) {
 
-    var detailResponse : DetailResponse ?= null
+    var detailResponse: DetailResponse? = null
 
-    fun getFeeds() : Observable<DetailResponse?> {
+    fun getFeeds(): Observable<DetailResponse?> {
 //        detailResponse?.let {
 //            return apiService.getData().doOnNext { detailResponse = it }
 //        }
 
-        return detailResponse?.let { Observable.fromCallable { detailResponse } } ?:
-        apiService.getData().doOnNext { detailResponse = it }
+        return detailResponse?.let {
+            println("loading from cache presenter")
+            Observable.fromCallable { detailResponse }
+        } ?: run {
+            println("loading from server presenter")
+            apiService.getData().doOnNext { detailResponse = it }
+        }
     }
 }

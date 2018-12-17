@@ -14,6 +14,7 @@ class MainPresenter(var schedulers: SchedulersUtil,
 
     fun loadData() {
         showLoading(true)
+        println("show loading called presenter")
 
         disposables.add(usecase.execute().subscribeOn(schedulers.io()).observeOn(schedulers.ui())
                 .subscribeWith(object : DisposableObserver<DetailResponse>() {

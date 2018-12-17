@@ -43,12 +43,13 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         view = this
 
         viewModel = ViewModelProviders.of(this@MainActivity).get(MainActivityViewModel::class.java)
-        var presenter: MainPresenter = viewModel.presenter ?: run {
+        val presenter: MainPresenter = viewModel.presenter ?: run {
             val apiService = NetworkHandler.getApiService()
-            var feedsRepository = FeedRespository(apiService)
+            val feedsRepository = FeedRespository(apiService)
             val usecase = FetchDetailUsecase(feedsRepository)
             val schedulers = SchedulersUtil()
             presenter = MainPresenter(schedulers, usecase)
+            viewModel.presenter = presenter
             return presenter
         }
 
@@ -56,13 +57,13 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     }
 
     fun init() {
-        if (supportFragmentManager.findFragmentByTag("success") != null) {
-            detailFrament = supportFragmentManager.findFragmentByTag("success") as DetailFragment
-            supportFragmentManager.beginTransaction().replace(R.id.flContainer, detailFrament, "success").commit()
-            onLoading(Response.OnLoading(false))
-        } else {
+//        if (supportFragmentManager.findFragmentByTag("success") != null) {
+//            detailFrament = supportFragmentManager.findFragmentByTag("success") as DetailFragment
+//            supportFragmentManager.beginTransaction().replace(R.id.flContainer, detailFrament, "success").commit()
+//            onLoading(Response.OnLoading(false))
+//        } else {
             loadData()
-        }
+//        }
     }
 
     override fun onStart() {
