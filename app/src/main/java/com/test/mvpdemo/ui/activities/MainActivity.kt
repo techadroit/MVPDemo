@@ -1,10 +1,12 @@
 package com.test.mvpdemo.ui.activities
 
 import android.annotation.SuppressLint
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.test.mvpdemo.R
 import com.test.mvpdemo.data.network.NetworkHandler
+import com.test.mvpdemo.data.repositories.FeedRespository
 import com.test.mvpdemo.data.response.DetailResponse
 import com.test.mvpdemo.data.usecases.FetchDetailUsecase
 import com.test.mvpdemo.ui.base.BaseActivity
@@ -14,6 +16,7 @@ import com.test.mvpdemo.ui.fragments.ErrorFragment
 import com.test.mvpdemo.ui.fragments.OnRefreshListener
 import com.test.mvpdemo.ui.presenter.MainPresenter
 import com.test.mvpdemo.ui.presenter.MainView
+import com.test.mvpdemo.ui.viewmodel.MainActivityViewModel
 import com.test.mvpdemo.util.SchedulersUtil
 import com.test.mvpdemo.util.addDetailScreenAnimation
 import com.test.mvpdemo.util.addErrorAnimation
@@ -24,6 +27,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
 
     var onRefresh: Boolean = false
     lateinit var detailFrament: DetailFragment
+    lateinit var viewModel: MainActivityViewModel
     var title: String? = null
 
     override fun onRefresh() {
@@ -38,10 +42,17 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     override fun initPresenter(): MainPresenter {
         view = this
 
-        val apiService = NetworkHandler.getApiService()
-        val usecase = FetchDetailUsecase(apiService)
-        val schedulers = SchedulersUtil()
-        return MainPresenter(schedulers, usecase)
+        viewModel = ViewModelProviders.of(this@MainActivity).get(MainActivityViewModel::class.java)
+        var presenter: MainPresenter = viewModel.presenter ?: run {
+            val apiService = NetworkHandler.getApiService()
+            var feedsRepository = FeedRespository(apiService)
+            val usecase = FetchDetailUsecase(feedsRepository)
+            val schedulers = SchedulersUtil()
+            presenter = MainPresenter(schedulers, usecase)
+            return presenter
+        }
+
+        return presenter
     }
 
     fun init() {

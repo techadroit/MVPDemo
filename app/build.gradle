@@ -53,6 +53,7 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
     implementation "blue.aodev:material-values:$rootProject.materialValuesVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
 
     testImplementation 'org.mockito:mockito-core:2.9.0'
     androidTestImplementation 'org.mockito:mockito-core:2.9.0'

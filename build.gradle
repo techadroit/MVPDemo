@@ -44,4 +44,5 @@ ext {
     espressoVersion = '3.0.2'
     constraintLayout = '1.1.2'
     materialValuesVersion = '1.1.1'
+    lifecycleVersion = '1.1.1'
 }
