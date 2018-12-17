@@ -9,7 +9,12 @@ class FeedRespository constructor(var apiService: ApiService) {
 
     var detailResponse : DetailResponse ?= null
 
-    fun getFeeds() : Observable<DetailResponse> {
-        return apiService.getData().doOnNext { detailResponse = it }
+    fun getFeeds() : Observable<DetailResponse?> {
+//        detailResponse?.let {
+//            return apiService.getData().doOnNext { detailResponse = it }
+//        }
+
+        return detailResponse?.let { Observable.fromCallable { detailResponse } } ?:
+        apiService.getData().doOnNext { detailResponse = it }
     }
 }
