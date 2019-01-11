@@ -16,6 +16,9 @@ abstract class BasePresenter< T : BaseView>  {
         this.view = null
     }
 
+    /**
+     * clear if any observable is running
+     */
     fun onPresenterDestroy() {
         disposables.clear()
     }

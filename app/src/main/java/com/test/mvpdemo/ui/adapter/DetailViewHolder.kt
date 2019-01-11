@@ -16,6 +16,9 @@ class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Layo
 
         tvTitle.text = detail.title
 
+        /**
+         * hide the description view if desc not available
+         */
         if(tvDescription != null) {
             if (detail.description != null && !detail.description.equals("null", true)) {
                 tvDescription.text = detail.description

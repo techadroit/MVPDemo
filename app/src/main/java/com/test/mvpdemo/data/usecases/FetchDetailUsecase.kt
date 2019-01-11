@@ -6,6 +6,9 @@ import com.test.mvpdemo.ui.adapter.WITHOUT_DESC
 import com.test.mvpdemo.util.isNull
 import io.reactivex.Observable
 
+/**
+ * Usecase to fetch feeds and assign different view types depending on the availability of the data like image, desc, etc.
+ */
 class FetchDetailUsecase constructor(private var feedsRepository: FeedRespository) : Interactor<DetailResponse> {
     override fun execute(): Observable<DetailResponse> {
         return feedsRepository.getFeeds()

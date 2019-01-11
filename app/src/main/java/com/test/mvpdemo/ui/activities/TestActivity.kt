@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.annotation.VisibleForTesting
 import com.test.mvpdemo.R
 
+/**
+ *  A test activity to load fragments and test
+ */
 
 @VisibleForTesting
 class TestActivity : AppCompatActivity() {

@@ -17,6 +17,9 @@ object NetworkHandler {
 
     fun init() {
 
+        /**
+         * add interceptor
+         */
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient().newBuilder().addInterceptor(interceptor)

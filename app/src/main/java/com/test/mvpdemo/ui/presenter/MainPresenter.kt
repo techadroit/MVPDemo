@@ -12,16 +12,15 @@ class MainPresenter(var schedulers: SchedulersUtil,
 ) : BasePresenter<MainView>() {
 
 
+    /**
+     * load data from the server and update the view
+     */
     fun loadData() {
         showLoading(true)
-        println("show loading called presenter")
 
         disposables.add(usecase.execute().subscribeOn(schedulers.io()).observeOn(schedulers.ui())
                 .subscribeWith(object : DisposableObserver<DetailResponse>() {
-                    override fun onComplete() {
-
-                    }
-
+                    override fun onComplete() {}
                     override fun onNext(t: DetailResponse) {
                         showLoading(false)
                         view?.onSuccess(Response.SuccessResponse(t))

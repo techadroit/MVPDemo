@@ -5,5 +5,8 @@ import com.test.mvpdemo.ui.presenter.MainPresenter
 
 class MainActivityViewModel : BaseViewModel() {
 
+    /**
+     * Assign presenter and retain it accross orientation changes
+     */
     var presenter: MainPresenter ?= null
 }

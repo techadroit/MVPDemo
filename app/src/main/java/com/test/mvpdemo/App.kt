@@ -7,6 +7,9 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        /**
+         * initialize Network handler on application create
+         */
         NetworkHandler.init()
     }
 }

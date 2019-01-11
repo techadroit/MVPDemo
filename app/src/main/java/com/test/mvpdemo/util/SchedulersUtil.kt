@@ -19,13 +19,6 @@ class SchedulersUtil {
     }
 
     /**
-     * Computation thread pool scheduler
-     */
-    fun computation(): Scheduler {
-        return Schedulers.computation()
-    }
-
-    /**
      * Main Thread scheduler
      */
     fun ui(): Scheduler {

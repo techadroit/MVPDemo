@@ -36,6 +36,9 @@ fun addDetailScreenAnimation(fragment: DetailFragment) {
     }
 }
 
+/**
+ * check if a given string is null or not
+ */
 
 fun isNull(string : String?) : Boolean{
 

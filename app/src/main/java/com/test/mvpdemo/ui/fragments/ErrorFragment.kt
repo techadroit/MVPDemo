@@ -9,6 +9,10 @@ import com.test.mvpdemo.R
 import com.test.mvpdemo.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.error_screen.*
 
+/**
+ * fragments to show error message on the screen
+ */
+
 class ErrorFragment : BaseFragment() {
 
     private var listener: OnRetryListener? = null
@@ -19,11 +23,6 @@ class ErrorFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.error_screen, container, false)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
     }
 
     override fun onAttach(context: Context?) {

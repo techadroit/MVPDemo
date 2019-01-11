@@ -13,6 +13,9 @@ import com.test.mvpdemo.ui.adapter.DetailListAdapter
 import com.test.mvpdemo.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.detail_fragment_layout.*
 
+/**
+ * shows list of feeds
+ */
 class DetailFragment : BaseFragment() {
 
     lateinit var detailResponse : DetailResponse
@@ -21,11 +24,6 @@ class DetailFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.detail_fragment_layout,container,false)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        retainInstance = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +48,9 @@ class DetailFragment : BaseFragment() {
 
     fun addSwipeListener(){
 
+        /**
+         * Inform the activity to load the data again
+         */
         swipeRefresh.setOnRefreshListener {
             refreshListener?.onRefresh()
         }

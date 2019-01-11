@@ -30,6 +30,9 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     lateinit var viewModel: MainActivityViewModel
     var title: String? = null
 
+    /**
+     * load data on pull to refresh
+     */
     override fun onRefresh() {
         onRefresh = true
         loadData()
@@ -39,16 +42,27 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         return R.layout.activity_main
     }
 
+    /**
+     * initialize presenter
+     */
     override fun initPresenter(): MainPresenter {
         view = this
 
         viewModel = ViewModelProviders.of(this@MainActivity).get(MainActivityViewModel::class.java)
+
+        /**
+         * Create new presenter or fetch if from the viewmodel if it has retained the object
+         */
+
         val presenter: MainPresenter = viewModel.presenter ?: run {
             val apiService = NetworkHandler.getApiService()
             val feedsRepository = FeedRespository(apiService)
             val usecase = FetchDetailUsecase(feedsRepository)
             val schedulers = SchedulersUtil()
             presenter = MainPresenter(schedulers, usecase)
+            /**
+             * assign the viewmode to presenter
+             */
             viewModel.presenter = presenter
             return presenter
         }
@@ -57,13 +71,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     }
 
     fun init() {
-//        if (supportFragmentManager.findFragmentByTag("success") != null) {
-//            detailFrament = supportFragmentManager.findFragmentByTag("success") as DetailFragment
-//            supportFragmentManager.beginTransaction().replace(R.id.flContainer, detailFrament, "success").commit()
-//            onLoading(Response.OnLoading(false))
-//        } else {
-            loadData()
-//        }
+        loadData()
     }
 
     override fun onStart() {
@@ -88,15 +96,16 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         loadData()
     }
 
+    /**
+     * remove all fragments
+     */
     @SuppressLint("RestrictedApi")
     fun removeAllViews() {
-
         try {
             for (fragment in supportFragmentManager.fragments) {
                 supportFragmentManager.beginTransaction().remove(fragment).commit()
             }
         } catch (e: Exception) {
-
         }
     }
 
@@ -121,13 +130,15 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         processResponse(response)
     }
 
-
     fun processResponse(response: Response) {
 
         when (response) {
 
             is Response.OnLoading -> {
 
+                /**
+                 * if the pull to refresh is activated we dont show the loader on the screen
+                 */
                 if (onRefresh)
                     return
 
@@ -144,8 +155,9 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
                 tvTitle.text = detailReponse.title
                 toolbar.visibility = View.VISIBLE
 
-
-//                removeAllViews()
+                /**
+                 * pass the data to the fragment
+                 */
                 if (onRefresh) {
                     detailFrament.addNewData(detailReponse.rows)
                 } else {
@@ -158,6 +170,9 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
                 }
                 onRefresh = false
             }
+            /**
+             * on error load error fragment
+             */
             is Response.ErrorResponse -> {
                 val fragment = ErrorFragment()
                 addErrorAnimation(fragment)
