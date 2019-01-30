@@ -1,6 +1,7 @@
 package com.test.mvpdemo.ui.activities
 
 import android.annotation.SuppressLint
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
@@ -14,16 +15,13 @@ import com.test.mvpdemo.ui.base.Response
 import com.test.mvpdemo.ui.fragments.DetailFragment
 import com.test.mvpdemo.ui.fragments.ErrorFragment
 import com.test.mvpdemo.ui.fragments.OnRefreshListener
-import com.test.mvpdemo.ui.presenter.MainPresenter
-import com.test.mvpdemo.ui.presenter.MainView
 import com.test.mvpdemo.ui.viewmodel.MainActivityViewModel
-import com.test.mvpdemo.util.SchedulersUtil
 import com.test.mvpdemo.util.addDetailScreenAnimation
 import com.test.mvpdemo.util.addErrorAnimation
 import com.test.mvpdemo.util.getRotateAnimation
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRetryListener, com.test.mvpdemo.ui.presenter.MainView, OnRefreshListener {
+class MainActivity : BaseActivity(), ErrorFragment.OnRetryListener, OnRefreshListener {
 
     var onRefresh: Boolean = false
     lateinit var detailFrament: DetailFragment
@@ -45,29 +43,34 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     /**
      * initialize presenter
      */
-    override fun initPresenter(): MainPresenter {
-        view = this
+    fun initViewModel() {
 
         viewModel = ViewModelProviders.of(this@MainActivity).get(MainActivityViewModel::class.java)
 
-        /**
-         * Create new presenter or fetch if from the viewmodel if it has retained the object
-         */
+        val apiService = NetworkHandler.getApiService()
+        val feedsRepository = FeedRespository(apiService)
+        val usecase = FetchDetailUsecase(feedsRepository)
+        observerLoadEvent()
+        viewModel.loadData(usecase)
+    }
 
-        val presenter: MainPresenter = viewModel.presenter ?: run {
-            val apiService = NetworkHandler.getApiService()
-            val feedsRepository = FeedRespository(apiService)
-            val usecase = FetchDetailUsecase(feedsRepository)
-            val schedulers = SchedulersUtil()
-            presenter = MainPresenter(schedulers, usecase)
-            /**
-             * assign the viewmode to presenter
-             */
-            viewModel.presenter = presenter
-            return presenter
-        }
+    fun observerLoadEvent() {
+        viewModel.onLoadData.observes(this, object : Observer<Response> {
+            override fun onChanged(t: Response?) {
+                when (t) {
+                    is Response.SuccessResponse -> {
+                        onSuccess(t)
+                    }
+                    is Response.OnLoading -> {
+                        onLoading(t)
+                    }
+                    is Response.ErrorResponse -> {
+                        onError(t)
+                    }
+                }
+            }
 
-        return presenter
+        })
     }
 
     fun init() {
@@ -110,7 +113,7 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
     }
 
     fun loadData() {
-        presenter.loadData()
+        initViewModel()
     }
 
     fun startLoading() {
@@ -118,15 +121,15 @@ class MainActivity : BaseActivity<MainPresenter, MainView>(), ErrorFragment.OnRe
         imvLoading.startAnimation(getRotateAnimation())
     }
 
-    override fun onError(response: Response) {
+    fun onError(response: Response) {
         processResponse(response)
     }
 
-    override fun onSuccess(response: Response) {
+    fun onSuccess(response: Response) {
         processResponse(response)
     }
 
-    override fun onLoading(response: Response) {
+    fun onLoading(response: Response) {
         processResponse(response)
     }
 
