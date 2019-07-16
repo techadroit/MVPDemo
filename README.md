@@ -1,4 +1,4 @@
-# MVPDemo
+# MVVMDemo
 A simple app to demonstrates MVP with mvvm architecture in android.
 
 In this app we have used viewmodel to retain the presenter across the recreation of activity. 
